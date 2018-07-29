@@ -46,6 +46,7 @@ namespace BabyShop
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
                 app.UseDatabaseErrorPage();
             }
             else
