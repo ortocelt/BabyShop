@@ -34,8 +34,8 @@ namespace BabyShop
                 .AddDefaultTokenProviders();
 
             // Add application services.
+            services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddTransient<IEmailSender, EmailSender>();
-
             services.AddMvc();
         }
 
@@ -61,7 +61,7 @@ namespace BabyShop
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Product}/{action=List}/{id?}");
             });
         }
     }
