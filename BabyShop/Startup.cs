@@ -34,7 +34,7 @@ namespace BabyShop
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc();
         }
@@ -64,6 +64,7 @@ namespace BabyShop
                     name: "default",
                     template: "{controller=Product}/{action=List}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }
