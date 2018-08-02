@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BabyShop.Models;
+using BabyShop.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabyShop.Controllers
@@ -24,11 +25,20 @@ namespace BabyShop.Controllers
         //Take shows Products from the database as 
         //described in pageSize field
 
-        public ViewResult List(int productPage = 1) 
-            => View(repository.Products
-                .OrderBy(p => p.ProductID)
-                .Skip((productPage - 1) * pageSize)
-                .Take(pageSize));
+        public ViewResult List(int productPage = 1)
+            => View(new ProductsListViewModel
+            {
+                Products = repository.Products
+                    .OrderBy(p => p.ProductID)
+                    .Skip((productPage - 1) * pageSize)
+                    .Take(pageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = pageSize,
+                    TotalItems = repository.Products.Count()
+                }
+            });
 
     }
 }
