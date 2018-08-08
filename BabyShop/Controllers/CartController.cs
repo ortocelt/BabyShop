@@ -25,11 +25,11 @@ namespace BabyShop.Controllers
                 ReturnUrl = returnUrl
             });
         }
-
-        public RedirectToActionResult AddToCart(int productId, string returnUrl)
+        [HttpPost]
+        public RedirectToActionResult AddToCart(int ProductId, string returnUrl)
         {
             Product product = repository.Products
-                .FirstOrDefault(p => p.ProductID == productId);
+                .FirstOrDefault(p => p.ProductID == ProductId);
 
             if (product != null)
             {

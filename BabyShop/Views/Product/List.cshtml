@@ -4,15 +4,18 @@
 }
 @model ProductsListViewModel
 
+
+<div>
 @foreach (var p in Model.Products)
 {
-<div>
     <h3>@p.Name</h3>
     @p.Description
     <h4>@p.Price.ToString("c")</h4>
+    
+    
     <form id="@p.ProductID" asp-action="AddToCart"
           asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="@p.ProductID" />
+        <input type="hidden" asp-for="@p.ProductID" name="ProductId"/>
         <input type="hidden" name="returnUrl"
                value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <span class="card-text p-1">
@@ -23,9 +26,9 @@
             </button>
         </span>
     </form>
-</div>
 
 }
+</div>
 
     <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
          page-class="btn" page-class-normal="btn-secondary"
